@@ -21,6 +21,27 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 }
 
+/* 江南水乡主题色彩变量 - 青色、绿色系 */
+:root {
+  /* 主要色彩 - 江南水乡特色 */
+  --jiangnan-primary: #4A9B8C;      /* 主要青色 - 江南水乡主色调 */
+  --jiangnan-secondary: #7FB069;    /* 次要绿色 - 江南春色 */
+  --jiangnan-accent: #A8D5BA;       /* 强调色 - 淡雅青绿 */
+  --jiangnan-light: #D4E9D7;        /* 浅色 - 清新淡雅 */
+  --jiangnan-dark: #2D5A4A;         /* 深色 - 深沉稳重 */
+  
+  /* 辅助色彩 */
+  --jiangnan-water: #B8E6E1;        /* 水色 - 江南水乡水色 */
+  --jiangnan-bamboo: #9DC183;       /* 竹色 - 江南竹林 */
+  --jiangnan-lotus: #E8F4F8;        /* 荷色 - 江南荷花 */
+  --jiangnan-stone: #C8D5B9;        /* 石色 - 江南石桥 */
+  
+  /* 渐变色彩 */
+  --jiangnan-gradient-1: linear-gradient(135deg, #4A9B8C 0%, #7FB069 100%);  /* 主渐变 */
+  --jiangnan-gradient-2: linear-gradient(135deg, #B8E6E1 0%, #A8D5BA 100%);  /* 水色渐变 */
+  --jiangnan-gradient-3: linear-gradient(135deg, #4A9B8C 0%, #2D5A4A 100%);  /* 深色渐变 */
+}
+
 /* semantic color variables for this project */
 :root {
   --color-background: var(--vt-c-white);

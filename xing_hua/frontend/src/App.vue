@@ -1,48 +1,24 @@
 <!-- src/App.vue -->
 <script setup lang="ts">
-import { RouterView, useRoute, useRouter } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
+import AppNavbar from '@/components/AppNavbar.vue'
 
 const route = useRoute()
-const router = useRouter()
 </script>
 
 <template>
   <div id="app">
-    <!-- 顶部导航栏 -->
     <header class="app-header">
-      <div class="header-content">
-        <!-- 返回主页按钮 -->
-        <button
-            v-if="route.path !== '/'"
-            @click="router.push('/')"
-            class="back-button"
-            title="返回主页"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-               xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 12H5M12 19L5 12L12 5"
-                  stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span>主页</span>
-        </button>
-
-        <!-- 页面标题 -->
-        <div class="title-container">
-          <h1 class="page-title">
-            <span class="title-text">
-              {{ route.meta.title || '未命名页面' }}
-            </span>
-            <div class="title-underline"></div>
-          </h1>
-        </div>
-
-        <!-- 右侧占位 -->
-        <div class="header-spacer"></div>
+      <AppNavbar />
+      <div class="title-stack">
+        <p class="page-label">当前页面</p>
+        <h1 class="page-title">
+          <span class="title-text">{{ route.meta.title || '未命名页面' }}</span>
+          <span class="title-underline"></span>
+        </h1>
       </div>
     </header>
 
-    <!-- 主体内容 -->
     <main class="main-content">
       <RouterView />
     </main>
@@ -50,7 +26,8 @@ const router = useRouter()
 </template>
 
 <style>
-/* 背景整体渐变 + 星空质感 */html, body, #app {
+/* 江南水乡主题 - 整体背景渐变 */
+html, body, #app {
   height: 100%;
   width: 100vw;         /* 确保始终铺满窗口 */
   max-width: 100vw;     /* 防止子元素撑大 */
@@ -58,7 +35,8 @@ const router = useRouter()
   padding: 0;
   overflow-x: hidden;   /* 禁止横向滚动 */
   box-sizing: border-box;
-  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+  /* 江南水乡背景 - 从水色到青绿的渐变，营造水乡氛围 */
+  background: linear-gradient(135deg, #E8F4F8 0%, #B8E6E1 30%, #A8D5BA 70%, #D4E9D7 100%);
 }
 
 #app {
@@ -67,7 +45,6 @@ const router = useRouter()
   flex-direction: column;
 }
 
-
 .main-content {
   flex: 1;
   min-height: 0;
@@ -75,103 +52,70 @@ const router = useRouter()
   animation: fadeIn 0.6s ease;
 }
 
-/* 顶部导航栏 */
 .app-header {
-  background: rgba(26, 26, 46, 0.85);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(72, 155, 140, 0.85);
+  backdrop-filter: blur(24px);
+  border-bottom: 2px solid rgba(74, 155, 140, 0.3);
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 16px rgba(74, 155, 140, 0.2);
   animation: slideDown 0.5s ease;
-}
-
-.header-content {
-  width: 100%;
-  padding: 18px 24px;
+  padding: 16px 24px 24px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 70px;
-  box-sizing: border-box;
+  flex-direction: column;
+  gap: 18px;
 }
 
-/* 返回按钮 */
-.back-button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
-  border: 1px solid rgba(102, 126, 234, 0.3);
-  color: #a0b4ff;
-  padding: 8px 16px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.25s ease;
-  backdrop-filter: blur(12px);
+.title-stack {
+  text-align: center;
 }
 
-.back-button:hover {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.35), rgba(118, 75, 162, 0.35));
-  border-color: rgba(102, 126, 234, 0.5);
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.25);
+.page-label {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
 }
 
-.back-button:active {
-  transform: translateY(0);
-}
-
-/* 标题容器 */
-.title-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-/* 页面标题 */
 .page-title {
   font-size: 2rem;
   font-weight: 700;
-  margin: 0;
-  text-align: center;
+  margin: 8px 0 0;
   position: relative;
-  letter-spacing: 0.02em;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title-text {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #e9fff7 0%, #d6f4ec 50%, #ffffff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   animation: glowText 3s ease-in-out infinite;
 }
 
-/* 标题下划线 */
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .title-text {
+    color: transparent;
+  }
+}
+
 .title-underline {
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
+  display: inline-block;
+  width: 72px;
   height: 3px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  border-radius: 2px;
-  box-shadow: 0 0 12px rgba(102, 126, 234, 0.5);
+  margin-top: 8px;
+  border-radius: 999px;
+  background: rgba(233, 255, 247, 0.8);
+  box-shadow: 0 0 12px rgba(233, 255, 247, 0.8);
   animation: pulse 2.5s infinite;
 }
 
-/* 占位 */
-.header-spacer {
-  flex: 1;
-}
-
-/* 动画效果 */
+/* 动画效果 - 江南水乡风格 */
 @keyframes slideDown {
   from { transform: translateY(-100%); opacity: 0; }
   to   { transform: translateY(0); opacity: 1; }
@@ -183,8 +127,18 @@ const router = useRouter()
 }
 
 @keyframes glowText {
-  0%, 100% { text-shadow: 0 0 6px rgba(102,126,234,0.6); }
-  50% { text-shadow: 0 0 12px rgba(118,75,162,0.8); }
+  /* 江南水乡文字发光效果 - 增强对比度和可读性 */
+  0%, 100% { 
+    text-shadow: 
+      0 1px 2px rgba(255, 255, 255, 0.4),
+      0 0 6px rgba(26, 61, 50, 0.8); 
+  }
+  50% { 
+    text-shadow: 
+      0 1px 2px rgba(255, 255, 255, 0.5),
+      0 0 8px rgba(45, 90, 74, 0.9),
+      0 0 12px rgba(74, 155, 140, 0.6); 
+  }
 }
 
 @keyframes pulse {
@@ -195,12 +149,10 @@ const router = useRouter()
 /* 响应式 */
 @media (max-width: 768px) {
   .page-title { font-size: 1.6rem; }
-  .title-underline { width: 40px; }
+  .title-underline { width: 50px; }
 }
 
 @media (max-width: 480px) {
   .page-title { font-size: 1.3rem; }
-  .back-button span { display: none; }
-  .back-button { padding: 8px; border-radius: 8px; }
 }
 </style>
